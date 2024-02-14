@@ -1,0 +1,50 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:controls="clr-namespace:WpfApp1.Controls"
+        xmlns:viewModels="clr-namespace:WpfApp1.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewModels:IdentificationViewModel}">
+                <controls:IdentificationControl />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:GarbageIdentificationViewModel}">
+                <controls:GarbageIdentificationControl />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ItemIdentificationViewModel}">
+                <controls:ItemIdentificationControl />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RewardViewModel}">
+                <controls:RewardControl />
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.Margin>8</Grid.Margin>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.ColumnSpan="2">
+            <ContentPresenter Content="{Binding SelectedViewModel}" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0">
+            <Button Command="{Binding PreviousCommand}">
+                <TextBlock>Previous</TextBlock>
+            </Button>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1">
+            <Button Command="{Binding NextCommand}">
+                <TextBlock>Next</TextBlock>
+            </Button>
+        </Border>
+    </Grid>    
+</Window>
