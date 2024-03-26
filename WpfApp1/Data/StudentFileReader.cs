@@ -5,7 +5,7 @@ namespace WpfApp1.Data
 {
     public class StudentFileReader
     {
-        private static StudentFileReader _instance;
+        private static StudentFileReader? _instance;
 
         public static StudentFileReader Instance
         {

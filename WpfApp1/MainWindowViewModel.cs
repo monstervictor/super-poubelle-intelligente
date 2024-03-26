@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using WpfApp1.Data;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1
@@ -7,13 +8,14 @@ namespace WpfApp1
     public class MainWindowViewModel : ViewModelBase
     {
         private ViewModelBase _selectedViewModel;
+        private IdentificationViewModel _identificationViewModel;
 
         public MainWindowViewModel()
         {
             ViewModels =
             [
-                new IdentificationViewModel(),
-                new ItemIdentificationViewModel(),
+                new IdentificationViewModel(AppState),
+                new ItemIdentificationViewModel(AppState),
                 new GarbageIdentificationViewModel(),
                 new RewardViewModel(),
             ];            
@@ -36,8 +38,10 @@ namespace WpfApp1
                 return current != 0;
             });
 
-            SelectedViewModel = ViewModels.First();
+            _selectedViewModel = ViewModels.First();
         }
+
+        public AppStateVM AppState { get; set; } = new AppStateVM();
 
         public ViewModelBase[] ViewModels { get; }
 
@@ -46,19 +50,24 @@ namespace WpfApp1
             get => _selectedViewModel; 
             set
             {
-                if (_selectedViewModel != value)
+                if (SetProperty(ref _selectedViewModel, value))
                 {
-                    _selectedViewModel = value;
-                    OnNotifyPropertyChanged(nameof(SelectedViewModel));
                     _nextCommand.NotifyCanExecuteChanged();
                     _previousCommand.NotifyCanExecuteChanged();
                 }
             }
         }
 
+        private Student? _student;
+        public Student? Student { get => _student; set => SetProperty(ref _student, value); }
+
         private RelayCommand _nextCommand;
         public ICommand NextCommand => _nextCommand;
         private RelayCommand _previousCommand;
         public ICommand PreviousCommand => _previousCommand;
+
+        private System.Windows.Visibility showStudentDetails;
+
+        public System.Windows.Visibility ShowStudentDetails { get => showStudentDetails; set => SetProperty(ref showStudentDetails, value); }
     }
 }
