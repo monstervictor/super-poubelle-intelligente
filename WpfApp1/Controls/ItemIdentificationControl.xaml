@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="400"
              d:DataContext="{d:DesignInstance Type=viewModels:ItemIdentificationViewModel}">
-    <Grid>
+    <Grid Width="500">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
@@ -17,7 +17,7 @@
         <Border Grid.Row="0">
             <TextBlock d:Text="Welcome to the Application Pablo Escobar">
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Welcome to the application {0} {1}">
+                    <MultiBinding StringFormat="{}Welcome to the application{0} {1}">
                         <Binding Path="AppState.SelectedStudent.FirstName" />
                         <Binding Path="AppState.SelectedStudent.LastName" />
                     </MultiBinding>
@@ -28,16 +28,35 @@
             <TextBlock>What item do you have?</TextBlock>
         </Border>
         <Border Grid.Row="2">
-            <ItemsControl d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding ItemOptions}">
+            <ItemsControl d:ItemsSource="{d:SampleData ItemCount=5}"
+                          ItemsSource="{Binding ItemOptions}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="100">
-                        <Button Content="{Binding Name}"></Button>
+                    <DataTemplate d:DataType="{x:Type viewModels:ItemOption}">
+                        <Border Width="80">
+                            <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ItemIdentificationControl}}, Path=ViewModel.SelectGarbageCommand}"
+                                    CommandParameter="{Binding Name}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0">
+                                            <Canvas Width="24" Height="24">
+                                                <Path Style="{StaticResource ItemOptionToPath}" />
+                                            </Canvas>
+                                        </Border>
+                                        <Border Grid.Row="1">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </Border>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

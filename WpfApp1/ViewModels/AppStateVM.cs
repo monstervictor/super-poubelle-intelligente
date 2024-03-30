@@ -18,6 +18,7 @@ namespace WpfApp1.ViewModels
 
         private Student _selectedStudent;
         private ObservableCollection<StudentScore> _scores;
+        private ItemOptionEnum _garbageSource = ItemOptionEnum.Unknown;
 
         public Student SelectedStudent
         {
@@ -27,10 +28,12 @@ namespace WpfApp1.ViewModels
 
         public void ClearState()
         {
-            SelectedStudent = null;
+            SelectedStudent = null!;
+            _garbageSource = ItemOptionEnum.Unknown;
         }
 
         public ObservableCollection<StudentScore> Scores { get => _scores; set => SetProperty(ref _scores, value); }
+        public ItemOptionEnum GarbageSource { get => _garbageSource; set => SetProperty(ref _garbageSource, value); }
     }
 
     public class StudentScore : ViewModelBase
