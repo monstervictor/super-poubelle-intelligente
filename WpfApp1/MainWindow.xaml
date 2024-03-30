@@ -11,8 +11,8 @@
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
     <Grid>
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewModels:IdentificationViewModel}">
-                <controls:IdentificationControl x:Name="identificationControl" />
+            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <controls:LoginControl/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:GarbageIdentificationViewModel}">
                 <controls:GarbageIdentificationControl />

@@ -18,9 +18,9 @@ namespace WpfApp1.Controls
     /// <summary>
     /// Interaction logic for Identification.xaml
     /// </summary>
-    public partial class IdentificationControl : UserControl
+    public partial class LoginControl : UserControl
     {
-        public IdentificationControl()
+        public LoginControl()
         {
             InitializeComponent();
         }

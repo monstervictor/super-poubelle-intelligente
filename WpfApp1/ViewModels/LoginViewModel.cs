@@ -1,11 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-using WpfApp1.Data;
+﻿using WpfApp1.Data;
 
 namespace WpfApp1.ViewModels
 {
-    public class IdentificationViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
-        public IdentificationViewModel(AppStateVM appState)
+        public LoginViewModel(AppStateVM appState)
         {
             AppState = appState;
         }

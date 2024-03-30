@@ -8,13 +8,13 @@ namespace WpfApp1
     public class MainWindowViewModel : ViewModelBase
     {
         private ViewModelBase _selectedViewModel;
-        private IdentificationViewModel _identificationViewModel;
+        private LoginViewModel _identificationViewModel;
 
         public MainWindowViewModel()
         {
             ViewModels =
             [
-                new IdentificationViewModel(AppState),
+                new LoginViewModel(AppState),
                 new ItemIdentificationViewModel(AppState),
                 new GarbageIdentificationViewModel(),
                 new RewardViewModel(),
