@@ -19,10 +19,10 @@
                 <TextBlock Text="Please submit your Student ID" />
             </Border>
             <Border>
-                <TextBox Text="{Binding StudentNumber}" />
+                <TextBox Text="{Binding Path=StudentNumber, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
             <Border>
-                <Button>Next</Button>
+                <Button Command="{Binding NextCommand}">Next</Button>
             </Border>
             <Grid>
                 <Border Visibility="{Binding ShowGreenCheck}">

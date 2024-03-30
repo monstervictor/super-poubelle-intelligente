@@ -17,9 +17,22 @@ namespace WpfApp1
                 new ItemIdentificationViewModel(AppState),
                 new GarbageIdentificationViewModel(),
                 new RewardViewModel(),
-            ];            
+            ];
+            InitializeCommands();
+            foreach (var viewModel in ViewModels)
+            {
+                viewModel.NextCommand = NextCommand;
+                viewModel.PreviousCommand = PreviousCommand;
+            }
+            _selectedViewModel = ViewModels.First();
+        }
+
+        private void InitializeCommands()
+        {
             _nextCommand = new RelayCommand(() =>
             {
+                if (!SelectedViewModel.CanExecuteNextCommand())
+                    return;
                 var current = Array.IndexOf(ViewModels, SelectedViewModel);
                 SelectedViewModel = ViewModels[current + 1];
             }, () =>
@@ -36,8 +49,6 @@ namespace WpfApp1
                 var current = Array.IndexOf(ViewModels, SelectedViewModel);
                 return current != 0;
             });
-
-            _selectedViewModel = ViewModels.First();
         }
 
         public AppStateVM AppState { get; set; } = new AppStateVM();

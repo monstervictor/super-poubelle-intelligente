@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
-    <Grid>
+    <Grid Margin="8">
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
                 <controls:HomeControl />
@@ -24,31 +24,8 @@
                 <controls:RewardControl />
             </DataTemplate>
         </Grid.Resources>
-        <Grid.Margin>8</Grid.Margin>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />            
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Visibility="{Binding ShowStudentDetails}">
-            <TextBlock Text="{Binding Student.FirstName}" />
-        </Border>        
         <Border Grid.Row="1" Grid.ColumnSpan="2">
             <ContentPresenter Content="{Binding SelectedViewModel}" />
         </Border>
-        <Border Grid.Row="2" Grid.Column="0">
-            <Button Command="{Binding PreviousCommand}">
-                <TextBlock>Previous</TextBlock>
-            </Button>
-        </Border>
-        <Border Grid.Row="2" Grid.Column="1">
-            <Button Command="{Binding NextCommand}">
-                <TextBlock>Next</TextBlock>
-            </Button>
-        </Border>
-    </Grid>    
+    </Grid>
 </Window>

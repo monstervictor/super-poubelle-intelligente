@@ -48,5 +48,10 @@ namespace WpfApp1.ViewModels
         
         public System.Windows.Visibility ShowCross { get => showCross; set => SetProperty(ref showCross, value); }
         public AppStateVM AppState { get; }
+
+        public override bool CanExecuteNextCommand()
+        {
+            return AppState.SelectedStudent != null;
+        }
     }
 }
