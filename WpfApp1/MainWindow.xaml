@@ -12,7 +12,7 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-                <controls:LoginControl/>
+                <controls:HomeControl />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:GarbageIdentificationViewModel}">
                 <controls:GarbageIdentificationControl />

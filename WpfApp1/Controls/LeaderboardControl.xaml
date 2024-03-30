@@ -4,11 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Controls"
+             xmlns:viewModels="clr-namespace:WpfApp1.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModels:AppStateVM}"
+             >
     <Grid>
-        <Viewbox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="0">
             <Label>Leaderboard</Label>
         </Viewbox>
+        <Border Grid.Row="1" Width="300">
+            <HeaderedItemsControl 
+                Header="Name and score"
+                d:ItemsSource="{d:SampleData ItemCount=3}" 
+                ItemsSource="{Binding Scores}" >
+                <HeaderedItemsControl.Template>
+                    <ControlTemplate TargetType="{x:Type HeaderedItemsControl}">
+                        <Border>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <ContentPresenter ContentSource="Header" />
+                                <Separator Grid.Row="1" />
+                                <ItemsPresenter Grid.Row="2" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </HeaderedItemsControl.Template>
+                <HeaderedItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="220">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Student.FirstName" />
+                                        <Binding Path="Student.LastName" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Score}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </HeaderedItemsControl.ItemTemplate>                
+            </HeaderedItemsControl>
+        </Border>
     </Grid>
 </UserControl>

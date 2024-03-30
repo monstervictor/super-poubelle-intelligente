@@ -1,6 +1,4 @@
-﻿using WpfApp1.Data;
-
-namespace WpfApp1.ViewModels
+﻿namespace WpfApp1.ViewModels
 {
     public class ItemIdentificationViewModel : ViewModelBase
     {
