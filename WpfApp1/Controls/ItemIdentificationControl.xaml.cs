@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.ViewModels;
 
 namespace WpfApp1.Controls
 {
@@ -24,5 +25,7 @@ namespace WpfApp1.Controls
         {
             InitializeComponent();
         }
+
+        public ItemIdentificationViewModel ViewModel => (ItemIdentificationViewModel)DataContext;
     }
 }

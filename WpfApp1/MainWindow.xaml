@@ -18,7 +18,9 @@
                 <controls:GarbageIdentificationControl />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:ItemIdentificationViewModel}">
-                <controls:ItemIdentificationControl />
+                <Viewbox VerticalAlignment="Top">
+                    <controls:ItemIdentificationControl />
+                </Viewbox>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:RewardViewModel}">
                 <controls:RewardControl />
