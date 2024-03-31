@@ -48,7 +48,7 @@
                                         </Grid.RowDefinitions>
                                         <Border Grid.Row="0">
                                             <Canvas Width="24" Height="24">
-                                                <Path Style="{StaticResource ItemOptionToPath}" />
+                                                <Path DataContext="{Binding Name}" Style="{StaticResource ItemOptionToPath}" />
                                             </Canvas>
                                         </Border>
                                         <Border Grid.Row="1">

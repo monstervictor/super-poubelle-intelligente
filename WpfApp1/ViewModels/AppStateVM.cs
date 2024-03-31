@@ -19,6 +19,7 @@ namespace WpfApp1.ViewModels
         private Student _selectedStudent;
         private ObservableCollection<StudentScore> _scores;
         private ItemOptionEnum _garbageSource = ItemOptionEnum.Unknown;
+        private BinSelection _selectedBin;
 
         public Student SelectedStudent
         {
@@ -34,6 +35,7 @@ namespace WpfApp1.ViewModels
 
         public ObservableCollection<StudentScore> Scores { get => _scores; set => SetProperty(ref _scores, value); }
         public ItemOptionEnum GarbageSource { get => _garbageSource; set => SetProperty(ref _garbageSource, value); }
+        public BinSelection SelectedBin { get => _selectedBin; set => SetProperty(ref _selectedBin, value); }
     }
 
     public class StudentScore : ViewModelBase

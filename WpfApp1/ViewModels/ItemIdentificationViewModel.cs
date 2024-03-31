@@ -23,7 +23,7 @@ namespace WpfApp1.ViewModels
             NextCommand.Execute(item);
         }
 
-        public AppStateVM AppState { get; set; }
+        public AppStateVM AppState { get; }
 
         public List<ItemOption> ItemOptions { get; set; }
 
