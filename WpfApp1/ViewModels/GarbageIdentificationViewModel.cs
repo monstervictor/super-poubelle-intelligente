@@ -42,6 +42,7 @@ namespace WpfApp1.ViewModels
 
     public enum BinSelection
     {
+        None,
         Garbage,
         Recycling,
         Compost

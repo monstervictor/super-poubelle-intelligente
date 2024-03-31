@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WpfApp1.ViewModels
 {
@@ -14,12 +15,17 @@ namespace WpfApp1.ViewModels
                     Score = 5
                 }
             ];
+            Solutions = new Dictionary<ItemOptionEnum, BinSelection>
+            {
+                { ItemOptionEnum.Vegetable, BinSelection.Compost},
+                { ItemOptionEnum.Fruit, BinSelection.Compost},
+            };
         }
 
         private Student _selectedStudent;
         private ObservableCollection<StudentScore> _scores;
         private ItemOptionEnum _garbageSource = ItemOptionEnum.Unknown;
-        private BinSelection _selectedBin;
+        private BinSelection _selectedBin = BinSelection.None;
 
         public Student SelectedStudent
         {
@@ -30,8 +36,11 @@ namespace WpfApp1.ViewModels
         public void ClearState()
         {
             SelectedStudent = null!;
-            _garbageSource = ItemOptionEnum.Unknown;
+            GarbageSource = ItemOptionEnum.Unknown;
+            SelectedBin = BinSelection.None;
         }
+
+        public Dictionary<ItemOptionEnum, BinSelection> Solutions { get; }
 
         public ObservableCollection<StudentScore> Scores { get => _scores; set => SetProperty(ref _scores, value); }
         public ItemOptionEnum GarbageSource { get => _garbageSource; set => SetProperty(ref _garbageSource, value); }
