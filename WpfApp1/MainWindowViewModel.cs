@@ -16,7 +16,7 @@ namespace WpfApp1
                 new LoginViewModel(AppState),
                 new ItemIdentificationViewModel(AppState),
                 new GarbageIdentificationViewModel(AppState),
-                new RewardViewModel(),
+                new RewardViewModel(AppState),
             ];
             InitializeCommands();
             foreach (var viewModel in ViewModels)

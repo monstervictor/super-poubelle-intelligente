@@ -14,19 +14,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/RecyclebecSvgs.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="Image" x:Key="BinSelectionToImageSource">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Garbage}">
-                        <Setter Property="Source" Value="{DynamicResource di_Dechets_carre_xaml}" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Compost}">
-                        <Setter Property="Source" Value="{DynamicResource di_Compost_carre_xaml}" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Recycling}">
-                        <Setter Property="Source" Value="{DynamicResource di_Plastique_carre_xaml}" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -47,15 +34,15 @@
         <Viewbox Grid.Column="1">
             <StackPanel Orientation="Vertical"
                     Grid.Column="1">
-                <Border Grid.Row="0" x:Name="textblockBorder">
+                <Border Grid.Row="0">
                     <TextBlock x:Name="textBlock">Where did you throw it?</TextBlock>
                 </Border>
                 <Border>
                     <Viewbox HorizontalAlignment="Left"
-                         Width="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}"
-                         Height="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}">
+                             Width="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}"
+                             Height="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}">
                         <Path DataContext="{Binding AppState.GarbageSource}"
-                          Style="{StaticResource ItemOptionToPath}" />
+                              Style="{StaticResource ItemOptionToPath}" />
                     </Viewbox>
                 </Border>
                 <Border HorizontalAlignment="Center">
@@ -82,21 +69,21 @@
                 </Border>
                 <Border Grid.Row="1">
                     <Button Command="{Binding SelectBin}"
-        CommandParameter="{Binding ElementName=recyclingButtonImage, Path=DataContext}">
+                            CommandParameter="{Binding ElementName=recyclingButtonImage, Path=DataContext}">
                         <Button.Content>
                             <Image x:Name="recyclingButtonImage"
-               DataContext="{x:Static viewModels:BinSelection.Recycling}" 
-               Style="{DynamicResource BinSelectionToImageSource}" />
+                                   DataContext="{x:Static viewModels:BinSelection.Recycling}" 
+                                   Style="{DynamicResource BinSelectionToImageSource}" />
                         </Button.Content>
                     </Button>
                 </Border>
                 <Border Grid.Row="2">
                     <Button Command="{Binding SelectBin}"
-        CommandParameter="{Binding ElementName=compostButtonImage, Path=DataContext}">
+                            CommandParameter="{Binding ElementName=compostButtonImage, Path=DataContext}">
                         <Button.Content>
                             <Image x:Name="compostButtonImage"
-               DataContext="{x:Static viewModels:BinSelection.Compost}" 
-               Style="{DynamicResource BinSelectionToImageSource}" />
+                                   DataContext="{x:Static viewModels:BinSelection.Compost}" 
+                                   Style="{DynamicResource BinSelectionToImageSource}" />
                         </Button.Content>
                     </Button>
                 </Border>

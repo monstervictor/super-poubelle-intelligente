@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace WpfApp1.ViewModels
 {
