@@ -12,6 +12,11 @@
         </Style>
         <Style TargetType="Border">
             <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="0" />
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style TargetType="Path" x:Key="ItemOptionToPath">
