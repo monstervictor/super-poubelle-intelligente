@@ -3,12 +3,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:root="clr-namespace:WpfApp1"
              xmlns:local="clr-namespace:WpfApp1.Controls"
+             xmlns:viewModels="clr-namespace:WpfApp1.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance viewModels:GarbageIdentificationViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/RecyclebecSvgs.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Image" x:Key="BinSelectionToImageSource">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Garbage}">
+                        <Setter Property="Source" Value="{DynamicResource di_Dechets_carre_xaml}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Compost}">
+                        <Setter Property="Source" Value="{DynamicResource di_Compost_carre_xaml}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Recycling}">
+                        <Setter Property="Source" Value="{DynamicResource di_Plastique_carre_xaml}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <Viewbox>
-            <Label>What garbage did you throw it in?</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0">
+            <Button>
+                <Button.Content>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Previous" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Border>
+        <Viewbox Grid.Column="1">
+            <StackPanel Orientation="Vertical"
+                    Grid.Column="1">
+                <Border Grid.Row="0" x:Name="textblockBorder">
+                    <TextBlock x:Name="textBlock">Where did you throw it?</TextBlock>
+                </Border>
+                <Border>
+                    <Viewbox HorizontalAlignment="Left"
+                         Width="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}"
+                         Height="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}">
+                        <Path DataContext="{Binding AppState.GarbageSource}"
+                          Style="{StaticResource ItemOptionToPath}" />
+                    </Viewbox>
+                </Border>
+                <Border HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding AppState.GarbageSource}" />
+                </Border>
+            </StackPanel>
         </Viewbox>
+        <Border Grid.Column="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <Button Command="{Binding SelectBin}"
+                            CommandParameter="{Binding ElementName=garbageButtonImage, Path=DataContext}">
+                        <Button.Content>
+                            <Image x:Name="garbageButtonImage"
+                                   DataContext="{x:Static viewModels:BinSelection.Garbage}" 
+                                   Style="{DynamicResource BinSelectionToImageSource}" />
+                        </Button.Content>
+                    </Button>
+                </Border>
+                <Border Grid.Row="1">
+                    <Button Command="{Binding SelectBin}"
+        CommandParameter="{Binding ElementName=recyclingButtonImage, Path=DataContext}">
+                        <Button.Content>
+                            <Image x:Name="recyclingButtonImage"
+               DataContext="{x:Static viewModels:BinSelection.Recycling}" 
+               Style="{DynamicResource BinSelectionToImageSource}" />
+                        </Button.Content>
+                    </Button>
+                </Border>
+                <Border Grid.Row="2">
+                    <Button Command="{Binding SelectBin}"
+        CommandParameter="{Binding ElementName=compostButtonImage, Path=DataContext}">
+                        <Button.Content>
+                            <Image x:Name="compostButtonImage"
+               DataContext="{x:Static viewModels:BinSelection.Compost}" 
+               Style="{DynamicResource BinSelectionToImageSource}" />
+                        </Button.Content>
+                    </Button>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
