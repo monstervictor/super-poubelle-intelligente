@@ -23,7 +23,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0">
+        <Border Grid.Column="0" Visibility="Collapsed">
             <Button Command="{Binding PreviousCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Vertical">
@@ -32,26 +32,21 @@
                 </Button.Content>
             </Button>
         </Border>
-        <Viewbox Grid.Column="1">
-            <StackPanel Orientation="Vertical"
-                    Grid.Column="1">
-                <Border Grid.Row="0">
-                    <TextBlock x:Name="textBlock">Please throw it in a bin</TextBlock>
-                </Border>
-                <Border>
-                    <Image DataContext="{Binding AppState.GarbageSource}" 
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0">
+                <Viewbox>
+                    <TextBlock x:Name="textBlock">Veuillez le jeter dans la poubelle adéquate</TextBlock>
+                </Viewbox>
+            </Border>
+            <Border Grid.Row="1" >
+                <Image DataContext="{Binding AppState.GarbageSource}" VerticalAlignment="Top"
                            Style="{StaticResource ItemOptionToImage}" />
-                    <!--
-                    <Viewbox HorizontalAlignment="Left"
-                             Width="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}"
-                             Height="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}">
-                        <Path DataContext="{Binding AppState.GarbageSource}"
-                              Style="{StaticResource ItemOptionToPath}" />
-                    </Viewbox>
-                    -->
-                </Border>
-            </StackPanel>
-        </Viewbox>
+            </Border>
+        </Grid>
         <Border Grid.Column="2">
             <Grid>
                 <Grid.RowDefinitions>

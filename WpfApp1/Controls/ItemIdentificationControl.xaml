@@ -24,7 +24,7 @@
         <Border Grid.Row="0">
             <TextBlock d:Text="Welcome to the Application Pablo Escobar">
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Welcome to the application{0} {1}">
+                    <MultiBinding StringFormat="{}Bienvenue dans l'application{0} {1}">
                         <Binding Path="AppState.SelectedStudent.FirstName" />
                         <Binding Path="AppState.SelectedStudent.LastName" />
                     </MultiBinding>
@@ -32,7 +32,7 @@
             </TextBlock>
         </Border>
         <Border Grid.Row="1">
-            <TextBlock>What item do you have?</TextBlock>
+            <TextBlock>Sélectionnez l'image qui correspond le mieux à vos déchets</TextBlock>
         </Border>
         <Border Grid.Row="2">
             <ItemsControl d:ItemsSource="{d:SampleData ItemCount=5}"
@@ -59,7 +59,7 @@
                                             </Image>
                                         </Border>
                                         <Border Grid.Row="1">
-                                            <TextBlock Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding Description}" />
                                         </Border>
                                     </Grid>
                                 </Button.Content>

@@ -12,7 +12,7 @@
     <StackPanel Orientation="Vertical" 
                 Width="350">
         <Border>
-            <TextBlock Text="Leaderboard" />
+            <TextBlock Text="Tableau de Classement" />
         </Border>
         <Border>
             <Separator Width="340" />

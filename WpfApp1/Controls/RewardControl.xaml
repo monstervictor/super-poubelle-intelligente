@@ -32,9 +32,8 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Grid.Triggers>
-            <EventTrigger SourceName="animateButton" RoutedEvent="Button.Click">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="garbageBorder" 
@@ -152,12 +151,13 @@ Duration="0:0:5">
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-        </Grid.Triggers>
+    </UserControl.Triggers>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Visibility="Collapsed">
             <Border>
                 <Button Command="{Binding PreviousCommand}">Back</Button>
             </Border>
@@ -202,7 +202,7 @@ Duration="0:0:5">
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
                 <Viewbox>
-                    <TextBlock VerticalAlignment="Top" Text="Let us see" />
+                    <TextBlock VerticalAlignment="Top" Text="Voyons voir" />
                 </Viewbox>
             </Border>
             <Border x:Name="secondSceneSuccess" 
@@ -239,29 +239,49 @@ Duration="0:0:5">
                     <ColumnDefinition Width="6*" />
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0"
+                       HorizontalAlignment="Right"
                        DataContext="{Binding AppState.GarbageSource}" 
                        Style="{StaticResource ItemOptionToImage}" />
                 <Image Grid.Column="1"
                        Source="{DynamicResource di_LeftArrow}"
                        Margin="10,0,10,0"/>
                 <Image Grid.Column="2"
+                       HorizontalAlignment="Left"
                        DataContext="{Binding CorrectBin}" 
                        Style="{StaticResource BinSelectionToImageSource}" />
             </Grid>
             <Border Grid.Row="1"
-                        Visibility="{Binding Converter={StaticResource InverseBoolToVisibilityConverter}, Path=IsSuccessful}">
-                <TextBlock Text="Better luck next time!" />
+                    Visibility="{Binding Converter={StaticResource InverseBoolToVisibilityConverter}, Path=IsSuccessful}">
+                <Viewbox>
+                    <Border BorderThickness="10">
+                        <TextBlock Text="Meilleure chance la prochaine fois !" />
+                    </Border>
+                </Viewbox>
             </Border>
             <Border Grid.Row="0"
                     Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsSuccessful}">
-                <TextBlock Text="You will be awarded a Token" />
+                <Viewbox>
+                    <TextBlock Text="Bravo!" />
+                </Viewbox>
             </Border>
             <Border Grid.Row="1"
                     Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsSuccessful}">
-                <TextBlock Text="Thank you" />
+                <Viewbox>
+                    <Border BorderThickness="10">
+                        <TextBlock Text="Merci de prendre soin de notre planète" />
+                    </Border>
+                </Viewbox>
             </Border>
             <Border Grid.Row="2">
-                <Button Command="{Binding RestartCommand}">Back to start</Button>
+                <Button Command="{Binding RestartCommand}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Border BorderThickness="10">
+                                <TextBlock Text="Retour au début" />
+                            </Border>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
             </Border>
         </Grid>
     </Grid>
