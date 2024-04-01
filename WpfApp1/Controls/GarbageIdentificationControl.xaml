@@ -12,21 +12,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/RecyclebecSvgs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="Image" x:Key="BinSelectionToImageSource">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Garbage}">
-                        <Setter Property="Source" Value="{DynamicResource di_Dechets_carre_xaml}" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Compost}">
-                        <Setter Property="Source" Value="{DynamicResource di_Compost_carre_xaml}" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding}" Value="{x:Static viewModels:BinSelection.Recycling}">
-                        <Setter Property="Source" Value="{DynamicResource di_Plastique_carre_xaml}" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -35,8 +23,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0">
-            <Button>
+        <Border Grid.Column="0" Visibility="Collapsed">
+            <Button Command="{Binding PreviousCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Previous" />
@@ -44,25 +32,21 @@
                 </Button.Content>
             </Button>
         </Border>
-        <Viewbox Grid.Column="1">
-            <StackPanel Orientation="Vertical"
-                    Grid.Column="1">
-                <Border Grid.Row="0" x:Name="textblockBorder">
-                    <TextBlock x:Name="textBlock">Where did you throw it?</TextBlock>
-                </Border>
-                <Border>
-                    <Viewbox HorizontalAlignment="Left"
-                         Width="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}"
-                         Height="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}">
-                        <Path DataContext="{Binding AppState.GarbageSource}"
-                          Style="{StaticResource ItemOptionToPath}" />
-                    </Viewbox>
-                </Border>
-                <Border HorizontalAlignment="Center">
-                    <TextBlock Text="{Binding AppState.GarbageSource}" />
-                </Border>
-            </StackPanel>
-        </Viewbox>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0">
+                <Viewbox>
+                    <TextBlock x:Name="textBlock">Veuillez le jeter dans la poubelle adéquate</TextBlock>
+                </Viewbox>
+            </Border>
+            <Border Grid.Row="1" >
+                <Image DataContext="{Binding AppState.GarbageSource}" VerticalAlignment="Top"
+                           Style="{StaticResource ItemOptionToImage}" />
+            </Border>
+        </Grid>
         <Border Grid.Column="2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -82,21 +66,21 @@
                 </Border>
                 <Border Grid.Row="1">
                     <Button Command="{Binding SelectBin}"
-        CommandParameter="{Binding ElementName=recyclingButtonImage, Path=DataContext}">
+                            CommandParameter="{Binding ElementName=recyclingButtonImage, Path=DataContext}">
                         <Button.Content>
                             <Image x:Name="recyclingButtonImage"
-               DataContext="{x:Static viewModels:BinSelection.Recycling}" 
-               Style="{DynamicResource BinSelectionToImageSource}" />
+                                   DataContext="{x:Static viewModels:BinSelection.Recycling}" 
+                                   Style="{DynamicResource BinSelectionToImageSource}" />
                         </Button.Content>
                     </Button>
                 </Border>
                 <Border Grid.Row="2">
                     <Button Command="{Binding SelectBin}"
-        CommandParameter="{Binding ElementName=compostButtonImage, Path=DataContext}">
+                            CommandParameter="{Binding ElementName=compostButtonImage, Path=DataContext}">
                         <Button.Content>
                             <Image x:Name="compostButtonImage"
-               DataContext="{x:Static viewModels:BinSelection.Compost}" 
-               Style="{DynamicResource BinSelectionToImageSource}" />
+                                   DataContext="{x:Static viewModels:BinSelection.Compost}" 
+                                   Style="{DynamicResource BinSelectionToImageSource}" />
                         </Button.Content>
                     </Button>
                 </Border>

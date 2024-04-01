@@ -38,20 +38,24 @@ namespace WpfApp1.ViewModels
                     }
                 }
             }
-        }        
+        }
 
         private System.Windows.Visibility showGreenCheck = System.Windows.Visibility.Hidden;
 
         public System.Windows.Visibility ShowGreenCheck { get => showGreenCheck; set => SetProperty(ref showGreenCheck, value); }
 
         private System.Windows.Visibility showCross = System.Windows.Visibility.Hidden;
-        
+
         public System.Windows.Visibility ShowCross { get => showCross; set => SetProperty(ref showCross, value); }
         public AppStateVM AppState { get; }
 
         public override bool CanExecuteNextCommand()
         {
             return AppState.SelectedStudent != null;
+        }
+        public override void Clear()
+        {
+            StudentNumber = string.Empty;
         }
     }
 }

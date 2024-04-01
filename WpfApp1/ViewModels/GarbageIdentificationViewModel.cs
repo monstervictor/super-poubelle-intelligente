@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace WpfApp1.ViewModels
 {
@@ -43,6 +42,7 @@ namespace WpfApp1.ViewModels
 
     public enum BinSelection
     {
+        None,
         Garbage,
         Recycling,
         Compost
