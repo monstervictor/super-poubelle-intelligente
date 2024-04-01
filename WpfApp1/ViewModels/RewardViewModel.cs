@@ -5,6 +5,7 @@
         public RewardViewModel(AppStateVM appState)
         {
             AppState = appState;
+            CorrectBin = BinSelection.Recycling;
             // CorrectBin = appState.Solutions[AppState.GarbageSource];
             // isSuccessful = CorrectBin == AppState.SelectedBin;
         }

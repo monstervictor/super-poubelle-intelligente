@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
              xmlns:local="clr-namespace:WpfApp1.Controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:WpfApp1.ViewModels"
              xmlns:converters="clr-namespace:WpfApp1.Converters"
              mc:Ignorable="d" 
@@ -15,11 +16,19 @@
                 <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            <sys:Double x:Key="StackPanel_SceneHeight">130</sys:Double>
+            <sys:Double x:Key="Images_Height">90</sys:Double>
+            <sys:Double x:Key="Arrow_Height">50</sys:Double>
+            <sys:Double x:Key="StartOpacityZero">1</sys:Double>
             <converters:BoolToObjectConverter x:Key="BoolToVisibilityConverter" TrueValue="{x:Static Visibility.Visible}" FalseValue="{x:Static Visibility.Collapsed}"/>
             <converters:BoolToObjectConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="{x:Static Visibility.Collapsed}" FalseValue="{x:Static Visibility.Visible}"/>
+
+            <Style TargetType="StackPanel">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+            </Style>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </UserControl.Resources>    
     <Grid>
         <Grid.Triggers>
             <EventTrigger SourceName="animateButton" RoutedEvent="Button.Click">
@@ -87,6 +96,56 @@
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
 
+                        <DoubleAnimation BeginTime="0:0:3.5"
+                                             Storyboard.TargetName="secondSceneStackPanel"
+                                             Storyboard.TargetProperty="Opacity"
+                                             From="0" To="1"
+                                             Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <QuadraticEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <DoubleAnimation BeginTime="0:0:5"
+                 Storyboard.TargetName="secondSceneSuccess"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0" To="1"
+                 Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <BackEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <DoubleAnimation BeginTime="0:0:5"
+Storyboard.TargetName="secondSceneFailure"
+Storyboard.TargetProperty="Opacity"
+From="0" To="1"
+Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <BackEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <DoubleAnimation BeginTime="0:0:6"
+                 Storyboard.TargetName="secondSceneStackPanel"
+                 Storyboard.TargetProperty="Opacity"
+                 From="1" To="0"
+                 Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <QuarticEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <DoubleAnimation BeginTime="0:0:6"
+Storyboard.TargetName="thirdScene"
+Storyboard.TargetProperty="Opacity"
+From="0" To="1"
+Duration="0:0:5">
+                            <DoubleAnimation.EasingFunction>
+                                <QuarticEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -106,45 +165,77 @@
                 <TextBlock Text="Did you succeed or fail?" />
             </Border>
         </StackPanel>
+        <Grid Grid.Row="1">
         <StackPanel Grid.Row="1" x:Name="firstSceneStackPanel"
-            Orientation="Horizontal"
-            Height="100">
-            <Border x:Name="garbageBorder" Opacity="0">
-                <Viewbox>
-                    <Path DataContext="{Binding AppState.GarbageSource}"
-                          Style="{StaticResource ItemOptionToPath}" />
-                </Viewbox>
+                    Orientation="Horizontal"
+                    Height="{StaticResource StackPanel_SceneHeight}">
+            <Border x:Name="garbageBorder" Opacity="{StaticResource StartOpacityZero}">
+                <Image DataContext="{Binding AppState.GarbageSource}" 
+                       Height="{StaticResource Images_Height}"
+                       Style="{StaticResource ItemOptionToImage}" />
             </Border>
-            <Border x:Name="plusBorder" Opacity="0">
-                <Viewbox>
+            <Border x:Name="plusBorder" Opacity="{StaticResource StartOpacityZero}">
+                <Viewbox Height="{StaticResource Images_Height}">
                     <Path Fill="Black" Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
                 </Viewbox>
             </Border>
-            <Border x:Name="binBorder" Opacity="0">
+            <Border x:Name="binBorder" Opacity="{StaticResource StartOpacityZero}">
                 <Image DataContext="{Binding AppState.SelectedBin}"
+                       Height="{StaticResource Images_Height}"
                        Style="{DynamicResource BinSelectionToImageSource}" />
             </Border>
         </StackPanel>
+        </Grid>
         <StackPanel Grid.Row="1" x:Name="secondSceneStackPanel"
-                    Orientation="Vertical">
+                    Orientation="Vertical"
+                    Height="{StaticResource StackPanel_SceneHeight}"
+                    Opacity="{StaticResource StartOpacityZero}">
             <Border>
-                <TextBlock Text="Let us see" />
+                <TextBlock VerticalAlignment="Top" Text="Let us see" />
             </Border>
-            <Border Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsSuccessful}"
-                    HorizontalAlignment="Center">
-                <Viewbox Height="100">
+            <Border x:Name="secondSceneSuccess" 
+                    Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsSuccessful}"
+                    HorizontalAlignment="Center" 
+                    Opacity="{StaticResource StartOpacityZero}">
+                <Viewbox Height="{StaticResource Images_Height}">
                     <Path Fill="#000000" Data="M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M13,9.94L14.06,11L15.12,9.94L16.18,11L17.24,9.94L15.12,7.82L13,9.94M8.88,9.94L9.94,11L11,9.94L8.88,7.82L6.76,9.94L7.82,11L8.88,9.94M12,17.5C14.33,17.5 16.31,16.04 17.11,14H6.89C7.69,16.04 9.67,17.5 12,17.5Z"></Path>
                 </Viewbox>
             </Border>
-            <Border Visibility="{Binding Converter={StaticResource InverseBoolToVisibilityConverter}, Path=IsSuccessful}"
-                    HorizontalAlignment="Center" Opacity="0">
-                <Viewbox Height="100">
+            <Border x:Name="secondSceneFailure" 
+                    Visibility="{Binding Converter={StaticResource InverseBoolToVisibilityConverter}, Path=IsSuccessful}"
+                    HorizontalAlignment="Center" 
+                    Opacity="{StaticResource StartOpacityZero}">
+                <Viewbox Height="{StaticResource Images_Height}">
                     <Path Fill="#000000" Data="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M15.5,8C16.3,8 17,8.7 17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M12,14C13.75,14 15.29,14.72 16.19,15.81L14.77,17.23C14.32,16.5 13.25,16 12,16C10.75,16 9.68,16.5 9.23,17.23L7.81,15.81C8.71,14.72 10.25,14 12,14Z"></Path>
                 </Viewbox>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Row="1" x:Name="thirdScene">
-
+        <StackPanel Grid.Row="1" x:Name="thirdScene"
+                        Height="{StaticResource StackPanel_SceneHeight}"
+                        Opacity="{StaticResource StartOpacityZero}"
+                        Orientation="Vertical">
+            <StackPanel Orientation="Horizontal"
+                        Visibility="{Binding Converter={StaticResource InverseBoolToVisibilityConverter}, Path=IsSuccessful}">
+                <Image DataContext="{Binding AppState.GarbageSource}" 
+                       Height="{StaticResource Images_Height}"
+                       Style="{StaticResource ItemOptionToImage}" />
+                <Image Source="{DynamicResource di_LeftArrow}"
+                       Height="{StaticResource Arrow_Height}"
+                       Margin="10,0,10,0"/>
+                <Image DataContext="{Binding CorrectBin}" 
+                       Height="{StaticResource Images_Height}"
+                       Style="{StaticResource BinSelectionToImageSource}" />
+            </StackPanel>
+            <Border Visibility="{Binding Converter={StaticResource InverseBoolToVisibilityConverter}, Path=IsSuccessful}">
+                <TextBlock Text="Better luck next time!" />
+            </Border>
+            <Border Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsSuccessful}">
+                <TextBlock Text="You will be awarded a Token" />
+            </Border>
+            <Border Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsSuccessful}">
+                <TextBlock Text="Thank you" />
+            </Border>
+            <Button>Restart</Button>
         </StackPanel>
     </Grid>
 </UserControl>
