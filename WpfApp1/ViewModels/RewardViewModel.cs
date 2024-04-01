@@ -5,8 +5,8 @@
         public RewardViewModel(AppStateVM appState)
         {
             AppState = appState;
-            CorrectBin = appState.Solutions[AppState.GarbageSource];
-            isSuccessful = CorrectBin == AppState.SelectedBin;
+            // CorrectBin = appState.Solutions[AppState.GarbageSource];
+            // isSuccessful = CorrectBin == AppState.SelectedBin;
         }
 
         private AppStateVM appState;

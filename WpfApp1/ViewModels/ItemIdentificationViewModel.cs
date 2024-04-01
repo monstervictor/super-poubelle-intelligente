@@ -11,6 +11,16 @@ namespace WpfApp1.ViewModels
             {
                 new() { Name = ItemOptionEnum.Fruit },
                 new() { Name = ItemOptionEnum.Vegetable },
+                new() { Name = ItemOptionEnum.Meat },
+                new() { Name = ItemOptionEnum.Snacks },
+                new() { Name = ItemOptionEnum.SnackEnclosure },
+                new() { Name = ItemOptionEnum.Recycling1 },
+                new() { Name = ItemOptionEnum.Recycling2 },
+                new() { Name = ItemOptionEnum.Recycling3 },
+                new() { Name = ItemOptionEnum.Recycling4,},
+                new() { Name = ItemOptionEnum.Recycling5 },
+                new() { Name = ItemOptionEnum.Recycling6 },
+                new() { Name = ItemOptionEnum.Recycling7 },
             };
             SelectGarbageCommand = new CommitToItemCommand(this);
         }
@@ -55,5 +65,15 @@ namespace WpfApp1.ViewModels
         Unknown = 0,
         Fruit,
         Vegetable,
+        Recycling1,
+        Recycling2,
+        Recycling3,
+        Recycling4,
+        Recycling5,
+        Recycling6,
+        Recycling7,
+        Meat,
+        Snacks,
+        SnackEnclosure,
     }
 }

@@ -8,6 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="400"
              d:DataContext="{d:DesignInstance Type=viewModels:ItemIdentificationViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Width="500">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -47,9 +54,9 @@
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <Border Grid.Row="0">
-                                            <Canvas Width="24" Height="24">
-                                                <Path DataContext="{Binding Name}" Style="{StaticResource ItemOptionToPath}" />
-                                            </Canvas>
+                                            <Image Style="{StaticResource ItemOptionToImage}"
+                                                   DataContext="{Binding Name}">
+                                            </Image>
                                         </Border>
                                         <Border Grid.Row="1">
                                             <TextBlock Text="{Binding Name}" />

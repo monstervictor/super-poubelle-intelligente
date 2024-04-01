@@ -12,7 +12,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/RecyclebecSvgs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -23,7 +24,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0">
-            <Button>
+            <Button Command="{Binding PreviousCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Previous" />
@@ -35,18 +36,19 @@
             <StackPanel Orientation="Vertical"
                     Grid.Column="1">
                 <Border Grid.Row="0">
-                    <TextBlock x:Name="textBlock">Where did you throw it?</TextBlock>
+                    <TextBlock x:Name="textBlock">Please throw it in a bin</TextBlock>
                 </Border>
                 <Border>
+                    <Image DataContext="{Binding AppState.GarbageSource}" 
+                           Style="{StaticResource ItemOptionToImage}" />
+                    <!--
                     <Viewbox HorizontalAlignment="Left"
                              Width="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}"
                              Height="{Binding ElementName=textBlock, Path=ActualWidth, Mode=OneWay}">
                         <Path DataContext="{Binding AppState.GarbageSource}"
                               Style="{StaticResource ItemOptionToPath}" />
                     </Viewbox>
-                </Border>
-                <Border HorizontalAlignment="Center">
-                    <TextBlock Text="{Binding AppState.GarbageSource}" />
+                    -->
                 </Border>
             </StackPanel>
         </Viewbox>
