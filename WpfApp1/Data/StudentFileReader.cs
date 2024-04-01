@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Reflection;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Data
@@ -12,7 +11,7 @@ namespace WpfApp1.Data
         {
             get
             {
-                if(_instance == null)
+                if (_instance == null)
                     _instance = new StudentFileReader();
                 return _instance;
             }
@@ -20,7 +19,30 @@ namespace WpfApp1.Data
 
         public Dictionary<string, Student> CodeToStudent { get; }
 
+        public IReadOnlyDictionary<string, int> Scores => _scores;
+        private Dictionary<string, int> _scores;
+
         private StudentFileReader()
+        {
+            CodeToStudent = ReadStudentsFile();
+
+        }
+
+        private Dictionary<string, int> ReadGlobalScoreFile()
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            string file = Path.Combine(path, "global_scores.csv");
+            var results = new Dictionary<string, int>();
+            var rawDataCollection = File.ReadAllLines(file).Skip(1);
+            foreach (var rawData in rawDataCollection)
+            {
+                var values = rawData.Split(',');
+                results.Add(values[0], int.Parse(values[1]));
+            }
+            return results;
+        }
+
+        private Dictionary<string, Student> ReadStudentsFile()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
             string file = Path.Combine(path, "171-172.csv");
@@ -38,7 +60,7 @@ namespace WpfApp1.Data
                 };
                 results.Add(student.Code, student);
             }
-            CodeToStudent = results;
+            return results;
         }
     }
 }

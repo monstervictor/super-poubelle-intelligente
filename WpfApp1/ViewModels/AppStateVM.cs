@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Security.Cryptography.X509Certificates;
 
 namespace WpfApp1.ViewModels
 {
@@ -13,6 +12,11 @@ namespace WpfApp1.ViewModels
                 {
                     Student = new Student { Code = "1", FirstName = "Benjamin Alberto", LastName = "Jimenez Amorim", Group = "1" },
                     Score = 5
+                },
+                new StudentScore
+                {
+                    Student = new Student { Code = "2", FirstName = "Lara Lagroy de Croutte de Saint Martin", LastName = "Gaspard", Group = "2" },
+                    Score = 7
                 }
             ];
             Solutions = new Dictionary<ItemOptionEnum, BinSelection>

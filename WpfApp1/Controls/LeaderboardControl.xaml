@@ -4,26 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:WpfApp1.ViewModels"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewModels:AppStateVM}"
              >
     <StackPanel Orientation="Vertical" 
-                Width="300">
+                Width="350">
         <Border>
             <TextBlock Text="Leaderboard" />
         </Border>
         <Border>
-            <Separator Width="265" />
+            <Separator Width="340" />
         </Border>
         <Border>
-            <ItemsControl
-                d:ItemsSource="{d:SampleData ItemCount=3}" 
-                ItemsSource="{Binding Scores}" >
+            <ItemsControl>
+                <ItemsControl.Resources>
+                    <CollectionViewSource x:Key="ScoresView" Source="{Binding Scores}">
+                        <CollectionViewSource.SortDescriptions>
+                            <scm:SortDescription PropertyName="Score" Direction="Descending" />
+                        </CollectionViewSource.SortDescriptions>
+                    </CollectionViewSource>
+                </ItemsControl.Resources>
+                <ItemsControl.ItemsSource>
+                    <Binding Source="{StaticResource ScoresView}" />
+                </ItemsControl.ItemsSource>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Width="220">
+                            <TextBlock Width="290">
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Student.FirstName" />
