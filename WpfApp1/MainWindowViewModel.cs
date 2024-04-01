@@ -16,7 +16,7 @@ namespace WpfApp1
                 new LoginViewModel(AppState),
                 new ItemIdentificationViewModel(AppState),
                 new GarbageIdentificationViewModel(AppState),
-                new RewardViewModel(AppState),
+                new RewardViewModel(AppState, this),
             ];
             InitializeCommands();
             foreach (var viewModel in ViewModels)
@@ -24,7 +24,7 @@ namespace WpfApp1
                 viewModel.NextCommand = NextCommand;
                 viewModel.PreviousCommand = PreviousCommand;
             }
-            _selectedViewModel = ViewModels.First();
+            Restart();
         }
 
         private void InitializeCommands()
@@ -49,6 +49,12 @@ namespace WpfApp1
                 var current = Array.IndexOf(ViewModels, SelectedViewModel);
                 return current != 0;
             });
+        }
+
+        internal void Restart()
+        {
+            AppState.ClearState();
+            SelectedViewModel = ViewModels.First();
         }
 
         public AppStateVM AppState { get; set; } = new AppStateVM();

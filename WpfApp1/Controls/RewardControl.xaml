@@ -9,7 +9,8 @@
              xmlns:converters="clr-namespace:WpfApp1.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewModels:RewardViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:RewardViewModel}" 
+             Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -260,7 +261,7 @@ Duration="0:0:5">
                 <TextBlock Text="Thank you" />
             </Border>
             <Border Grid.Row="2">
-                <Button>Back to start</Button>
+                <Button Command="{Binding RestartCommand}">Back to start</Button>
             </Border>
         </Grid>
     </Grid>

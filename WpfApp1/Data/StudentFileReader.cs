@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Data
@@ -21,7 +22,8 @@ namespace WpfApp1.Data
 
         private StudentFileReader()
         {
-            string file = "G:\\VSProjects\\school garbage projet\\171-172.csv";
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            string file = Path.Combine(path, "171-172.csv");
             var results = new Dictionary<string, Student>();
             var rawDataCollection = File.ReadAllLines(file).Skip(1);
             foreach (var rawData in rawDataCollection)
