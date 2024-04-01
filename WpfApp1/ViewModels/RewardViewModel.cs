@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using WpfApp1.Data;
 
 namespace WpfApp1.ViewModels
 {
@@ -22,10 +23,15 @@ namespace WpfApp1.ViewModels
 
         public bool IsSuccessful { get => isSuccessful; set => SetProperty(ref isSuccessful, value); }
 
-        internal void Initialize()
+        internal void CommitResult()
         {
             CorrectBin = appState.Solutions[AppState.GarbageSource];
             IsSuccessful = CorrectBin == AppState.SelectedBin;
+            if (isSuccessful)
+            {
+                Task.Run(() => StudentFileReader.Instance.AddPoint(AppState.SelectedStudent.Code));
+                AppState.AddPoint();
+            }
         }
 
         private RelayCommand restartCommand;

@@ -18,7 +18,7 @@ namespace WpfApp1.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel.Initialize();
+            ViewModel.CommitResult();
         }
     }
 }

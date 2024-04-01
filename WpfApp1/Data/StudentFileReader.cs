@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Data
@@ -25,13 +26,17 @@ namespace WpfApp1.Data
         private StudentFileReader()
         {
             CodeToStudent = ReadStudentsFile();
-
+            _scores = ReadGlobalScoreFile();
         }
 
-        private Dictionary<string, int> ReadGlobalScoreFile()
+        private Dictionary<string, int> ReadGlobalScoreFile(string fileName = "global_scores.csv")
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
-            string file = Path.Combine(path, "global_scores.csv");
+            string file = Path.Combine(path, fileName);
+            if (!File.Exists(file))
+            {
+                return [];
+            }
             var results = new Dictionary<string, int>();
             var rawDataCollection = File.ReadAllLines(file).Skip(1);
             foreach (var rawData in rawDataCollection)
@@ -40,6 +45,39 @@ namespace WpfApp1.Data
                 results.Add(values[0], int.Parse(values[1]));
             }
             return results;
+        }
+
+        public void AddPoint(string studentCode)
+        {
+            if (!_scores.TryGetValue(studentCode, out var score))
+                score = 0;
+            _scores[studentCode] = ++score;
+
+            WriteScoreFile(Scores);
+            WriteDifferentialScoreFile(studentCode);
+        }
+
+        private void WriteDifferentialScoreFile(string studentCode)
+        {
+            var differentialState = ReadGlobalScoreFile("tokens_to_give.csv");
+            if (!differentialState.TryGetValue(studentCode, out var score))
+                score = 0;
+            differentialState[studentCode] = ++score;
+            WriteScoreFile(differentialState, "tokens_to_give.csv");
+        }
+
+        private void WriteScoreFile(IReadOnlyDictionary<string, int> toWrite, string fileName = "global_scores.csv")
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            string file = Path.Combine(path, fileName);
+            var sb = new StringBuilder();
+            sb.AppendLine("Fiche,Score");
+            foreach ((var id, var score) in toWrite)
+            {
+                sb.AppendLine($"{id},{score}");
+            }
+            File.WriteAllText(file, sb.ToString());
+
         }
 
         private Dictionary<string, Student> ReadStudentsFile()
