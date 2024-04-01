@@ -54,6 +54,10 @@ namespace WpfApp1
         internal void Restart()
         {
             AppState.ClearState();
+            foreach (var viewModel in ViewModels)
+            {
+                viewModel.Clear();
+            }
             SelectedViewModel = ViewModels.First();
         }
 
@@ -63,7 +67,7 @@ namespace WpfApp1
 
         public ViewModelBase SelectedViewModel
         {
-            get => _selectedViewModel; 
+            get => _selectedViewModel;
             set
             {
                 if (SetProperty(ref _selectedViewModel, value))

@@ -32,5 +32,7 @@ namespace WpfApp1.ViewModels
 
             return false;
         }
+
+        public virtual void Clear() { }
     }
 }

@@ -25,7 +25,7 @@ namespace WpfApp1.ViewModels
         internal void Initialize()
         {
             CorrectBin = appState.Solutions[AppState.GarbageSource];
-            isSuccessful = CorrectBin == AppState.SelectedBin;
+            IsSuccessful = CorrectBin == AppState.SelectedBin;
         }
 
         private RelayCommand restartCommand;
