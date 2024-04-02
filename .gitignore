@@ -419,3 +419,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Data
+171-172.csv
