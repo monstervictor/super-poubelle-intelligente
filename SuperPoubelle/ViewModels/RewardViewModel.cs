@@ -1,9 +1,10 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
+using SuperPoubelle;
 using System.Windows.Input;
-using WpfApp1.Data;
+using SuperPoubelle.Data;
 
-namespace WpfApp1.ViewModels
+namespace SuperPoubelle.ViewModels
 {
     public class RewardViewModel : ViewModelBase
     {

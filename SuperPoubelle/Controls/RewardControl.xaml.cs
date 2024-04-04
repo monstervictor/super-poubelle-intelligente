@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WpfApp1.ViewModels;
+using SuperPoubelle.ViewModels;
 
-namespace WpfApp1.Controls
+namespace SuperPoubelle.Controls
 {
     /// <summary>
     /// Interaction logic for RewardControl.xaml

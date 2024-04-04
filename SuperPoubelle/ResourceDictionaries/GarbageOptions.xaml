@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:WpfApp1.ViewModels">
+                    xmlns:viewModels="clr-namespace:SuperPoubelle.ViewModels">
     
     <DrawingGroup x:Key="Recycle1_xaml">
         <DrawingGroup.ClipGeometry>

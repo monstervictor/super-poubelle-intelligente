@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Text;
-using WpfApp1.ViewModels;
+using SuperPoubelle.ViewModels;
 
-namespace WpfApp1.Data
+namespace SuperPoubelle.Data
 {
     public class StudentFileReader
     {

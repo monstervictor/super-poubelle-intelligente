@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace WpfApp1.ViewModels
+namespace SuperPoubelle.ViewModels
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

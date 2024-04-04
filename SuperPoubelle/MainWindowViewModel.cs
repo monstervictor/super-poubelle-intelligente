@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using SuperPoubelle.ViewModels;
 using System.Windows.Input;
-using WpfApp1.ViewModels;
 
-namespace WpfApp1
+namespace SuperPoubelle
 {
     public class MainWindowViewModel : ViewModelBase
     {

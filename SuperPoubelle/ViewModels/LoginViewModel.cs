@@ -1,6 +1,6 @@
-﻿using WpfApp1.Data;
+﻿using SuperPoubelle.Data;
 
-namespace WpfApp1.ViewModels
+namespace SuperPoubelle.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {

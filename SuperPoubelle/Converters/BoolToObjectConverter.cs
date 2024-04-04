@@ -1,9 +1,8 @@
-﻿using System.Text;
-using System.Windows.Data;
+﻿using System.Globalization;
 using System.Windows;
-using System.Globalization;
+using System.Windows.Data;
 
-namespace WpfApp1.Converters
+namespace SuperPoubelle.Converters
 {
     public partial class BoolToObjectConverter : DependencyObject, IValueConverter
     {

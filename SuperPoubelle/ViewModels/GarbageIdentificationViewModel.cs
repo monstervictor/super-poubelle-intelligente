@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace WpfApp1.ViewModels
+namespace SuperPoubelle.ViewModels
 {
     public class GarbageIdentificationViewModel : ViewModelBase
     {
