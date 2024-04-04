@@ -12,8 +12,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SuperPoubelle;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SuperPoubelle;component/ResourceDictionaries/GarbageOptions.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

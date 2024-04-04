@@ -14,8 +14,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SuperPoubelle;component/ResourceDictionaries/RecyclebecSvgs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SuperPoubelle;component/ResourceDictionaries/GarbageOptions.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <sys:Double x:Key="StackPanel_SceneHeight">130</sys:Double>
             <sys:Double x:Key="Images_Height">90</sys:Double>
