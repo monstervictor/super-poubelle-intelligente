@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Compost_carre.jpg" />
+    <Resource Include="Images\Dechets_carre.jpg" />
+    <Resource Include="Images\Plastique_carre.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
   </ItemGroup>
 
