@@ -422,3 +422,5 @@ FodyWeavers.xsd
 
 # Data
 171-172.csv
+
+*.bak
