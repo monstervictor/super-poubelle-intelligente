@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="SuperPoubelle.Controls.LeaderboardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:SuperPoubelle.ViewModels"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModels:AppStateVM}"
+             >
+    <StackPanel Orientation="Vertical" 
+                Width="350">
+        <Border>
+            <TextBlock Text="Tableau de Classement" />
+        </Border>
+        <Border>
+            <Separator Width="340" />
+        </Border>
+        <Border>
+            <ItemsControl>
+                <ItemsControl.Resources>
+                    <CollectionViewSource x:Key="ScoresView" Source="{Binding Scores}">
+                        <CollectionViewSource.SortDescriptions>
+                            <scm:SortDescription PropertyName="Score" Direction="Descending" />
+                        </CollectionViewSource.SortDescriptions>
+                    </CollectionViewSource>
+                </ItemsControl.Resources>
+                <ItemsControl.ItemsSource>
+                    <Binding Source="{StaticResource ScoresView}" />
+                </ItemsControl.ItemsSource>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="290">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Student.FirstName" />
+                                        <Binding Path="Student.LastName" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Score, StringFormat=Score: {0}}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+    </StackPanel>
+</UserControl>

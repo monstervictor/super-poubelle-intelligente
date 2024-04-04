@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="SuperPoubelle.Controls.ItemIdentificationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SuperPoubelle.Controls"
+             xmlns:viewModels="clr-namespace:SuperPoubelle.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400"
+             d:DataContext="{d:DesignInstance Type=viewModels:ItemIdentificationViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfApp1;component/ResourceDictionaries/GarbageOptions.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Width="500">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <TextBlock d:Text="Welcome to the Application Pablo Escobar">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Bienvenue dans l'application{0} {1}">
+                        <Binding Path="AppState.SelectedStudent.FirstName" />
+                        <Binding Path="AppState.SelectedStudent.LastName" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </Border>
+        <Border Grid.Row="1">
+            <TextBlock>Sélectionnez l'image qui correspond le mieux à vos déchets</TextBlock>
+        </Border>
+        <Border Grid.Row="2">
+            <ItemsControl d:ItemsSource="{d:SampleData ItemCount=5}"
+                          ItemsSource="{Binding ItemOptions}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate d:DataType="{x:Type viewModels:ItemOption}">
+                        <Border Width="80">
+                            <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ItemIdentificationControl}}, Path=ViewModel.SelectGarbageCommand}"
+                                    CommandParameter="{Binding Name}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0">
+                                            <Image Style="{StaticResource ItemOptionToImage}"
+                                                   DataContext="{Binding Name}">
+                                            </Image>
+                                        </Border>
+                                        <Border Grid.Row="1">
+                                            <TextBlock Text="{Binding Description}" />
+                                        </Border>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+    </Grid>
+</UserControl>
