@@ -8,7 +8,7 @@
              xmlns:viewModels="clr-namespace:SuperPoubelle.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance viewModels:GarbageIdentificationViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:GarbageIdentificationViewModel}" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
