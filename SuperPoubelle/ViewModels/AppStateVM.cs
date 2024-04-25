@@ -1,5 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using SuperPoubelle.Data;
+﻿using SuperPoubelle.Data;
+using System.Collections.ObjectModel;
 
 namespace SuperPoubelle.ViewModels
 {
@@ -12,6 +12,24 @@ namespace SuperPoubelle.ViewModels
             {
                 { ItemOptionEnum.Vegetable, BinSelection.Compost},
                 { ItemOptionEnum.Fruit, BinSelection.Compost},
+                { ItemOptionEnum.Alluminium, BinSelection.Recycling },
+{ItemOptionEnum.Recycling1, BinSelection.Recycling },
+{ItemOptionEnum.Recycling2,BinSelection.Recycling },
+{ItemOptionEnum.Recycling3,BinSelection.Recycling },
+{ItemOptionEnum.Recycling4,BinSelection.Recycling },
+{ItemOptionEnum.Recycling5,BinSelection.Recycling },
+{ItemOptionEnum.Recycling6,BinSelection.Garbage },
+{ItemOptionEnum.Recycling7,BinSelection.Garbage},
+{ItemOptionEnum.Meat, BinSelection.Compost },
+{ItemOptionEnum.Snacks, BinSelection.Compost },
+{ItemOptionEnum.SnackEnclosure, BinSelection.Garbage },
+{ItemOptionEnum.BrownPaper, BinSelection.Compost },
+{ItemOptionEnum.WetCardboard, BinSelection.Compost },
+{ItemOptionEnum.Tissues, BinSelection.Garbage },
+{ItemOptionEnum.Paper, BinSelection.Recycling },
+{ItemOptionEnum.Cardboard, BinSelection.Recycling },
+{ItemOptionEnum.Glass, BinSelection.Recycling },
+{ItemOptionEnum.NonRecyclable, BinSelection.Garbage },
             };
         }
 

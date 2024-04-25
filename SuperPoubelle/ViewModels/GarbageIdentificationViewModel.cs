@@ -1,4 +1,5 @@
 ﻿using SuperPoubelle.BalanceCommunication;
+using SuperPoubelle.Data;
 using System.Windows.Input;
 
 namespace SuperPoubelle.ViewModels
@@ -50,28 +51,44 @@ namespace SuperPoubelle.ViewModels
             Task.Run(() => FetchBalances());
         }
 
-        private Stack<IEnumerable<BalanceReport>> _data = new Stack<IEnumerable<BalanceReport>>();
+        private BalanceReport[]? _previousReading;
 
         private async Task FetchBalances()
         {
             _isMonitoring = true;
             do
             {
-                var balances = await BalanceClient.Instance.GetBalanceReports();
-                if (!_data.TryPeek(out var topOfStack))
+                var weightReading = (await BalanceClient.Instance.GetBalanceReports()).ToArray();
+                if (_previousReading == null)
                 {
-                    _data.Push(balances);
+                    _previousReading = weightReading;
+                    await Task.Delay(ConfigurationFile.Instance.Config.ReadingDelaysInMilliseconds);
                     continue;
                 }
 
-                // Magic
-                //PerformSelectBin(BinSelection.Compost);
+                var diff1 = _previousReading[0].Grams - weightReading[0].Grams;
+                var diff2 = _previousReading[1].Grams - weightReading[1].Grams;
 
-                _data.Push(balances);
-                await Task.Delay(500);
+                if (Math.Abs(diff1) > ConfigurationFile.Instance.Config.DifferenceForGarbageDecision)
+                {
+                    var selection = weightReading[0].BalanceIdentifier == "0" ? BinSelection.Recycling : BinSelection.Compost;
+                    _previousReading = null;
+                    PerformSelectBin(selection);
+                    break;
+                }
+                if (Math.Abs(diff2) > ConfigurationFile.Instance.Config.DifferenceForGarbageDecision)
+                {
+                    var selection = weightReading[1].BalanceIdentifier == "0" ? BinSelection.Recycling : BinSelection.Compost;
+                    _previousReading = null;
+                    PerformSelectBin(selection);
+                    break;
+                }
+
+                _previousReading = weightReading;
+                await Task.Delay(ConfigurationFile.Instance.Config.ReadingDelaysInMilliseconds);
 
             } while (_isMonitoring);
-            _data.Clear();
+            _previousReading = null;
         }
     }
 
